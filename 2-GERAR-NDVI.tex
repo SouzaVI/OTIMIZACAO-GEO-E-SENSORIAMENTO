@@ -1,0 +1,1001 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={NDVI (versão 1)},
+  pdfauthor={Igor Viana Souza},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{NDVI (versão 1)}
+\author{Igor Viana Souza}
+\date{14/12/2021}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduuxe7uxe3o}{%
+\subsubsection{1. Introdução}\label{introduuxe7uxe3o}}
+
+O documento tem como propósito auxiliar no entendimento do \emph{script}
+na geração de imagens NDVIs e RGBs. A sua principal função é automatizar
+alguns processos repetitivos durante a geração dos produtos, tais como:
+leitura de arquivos, recortes, cálculo do NDVI e exportação dos produtos
+gerados.
+
+\hypertarget{importauxe7uxe3o-das-bibliotecas}{%
+\subsubsection{2. Importação das
+bibliotecas}\label{importauxe7uxe3o-das-bibliotecas}}
+
+Os pacotes são conjunto de funções que nos auxiliarão a desenvolver um
+determinado resultado. Boa parte desses pacotes podem ser encontrados na
+base oficial do \emph{R (CRAN)}. Antes de importar as bibliotecas, é
+importante realizamos uma limpeza na mémoria do R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Limpar memória}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list=}\FunctionTok{ls}\NormalTok{(}\AttributeTok{all=}\ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Importando pacotes}
+\FunctionTok{library}\NormalTok{(raster)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Carregando pacotes exigidos: sp
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rgdal)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Please note that rgdal will be retired by the end of 2023,
+## plan transition to sf/stars/terra functions using GDAL and PROJ
+## at your earliest convenience.
+## 
+## rgdal: version: 1.5-27, (SVN revision 1148)
+## Geospatial Data Abstraction Library extensions to R successfully loaded
+## Loaded GDAL runtime: GDAL 3.2.1, released 2020/12/29
+## Path to GDAL shared files: C:/Users/igor.souza/Documents/R/R-4.1.1/library/rgdal/gdal
+## GDAL binary built with GEOS: TRUE 
+## Loaded PROJ runtime: Rel. 7.2.1, January 1st, 2021, [PJ_VERSION: 721]
+## Path to PROJ shared files: C:/Users/igor.souza/Documents/R/R-4.1.1/library/rgdal/proj
+## PROJ CDN enabled: FALSE
+## Linking to sp version:1.4-5
+## To mute warnings of possible GDAL/OSR exportToProj4() degradation,
+## use options("rgdal_show_exportToProj4_warnings"="none") before loading sp or rgdal.
+## Overwritten PROJ_LIB was C:/Users/igor.souza/Documents/R/R-4.1.1/library/rgdal/proj
+\end{verbatim}
+
+\hypertarget{carregando-diretuxf3rio}{%
+\subsubsection{3. Carregando diretório}\label{carregando-diretuxf3rio}}
+
+As linhas abaixo, nos permite selecionar o local, no qual, importaremos
+nossos arquivos e exportaremos o produto final. É de importancia criar
+uma pasta no diretório no disco C:. Observe abaixo, o caminho de pasta a
+ser criado.
+
+\hypertarget{criando-uma-lista-para-armazenar-nossos-arquivos}{%
+\subsubsection{4. Criando uma lista para armazenar nossos
+arquivos}\label{criando-uma-lista-para-armazenar-nossos-arquivos}}
+
+Dentro da pasta R criada anteriormente, crie uma pasta chamada RGB, NDVI
+e TALHAO. Em cada pasta, você deverá colocar as imagens selecionadas e o
+poligono. Ao executar as linhas abaixo, é observado o que contém
+armazenado em lista em cada pasta.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{RGB }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path=}\StringTok{"RGB"}\NormalTok{, }\AttributeTok{pattern =} \StringTok{".tif"}\NormalTok{, }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)    }
+\NormalTok{SHP }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path=}\StringTok{"TALHAO"}\NormalTok{, }\AttributeTok{pattern =} \StringTok{".shp"}\NormalTok{, }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{INDICE }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path=}\StringTok{"NDVI"}\NormalTok{, }\AttributeTok{pattern =} \StringTok{".tif"}\NormalTok{, }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{) }
+
+\NormalTok{RGB}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "RGB/S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SHP}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "TALHAO/co_1.shp"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{INDICE}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "NDVI/S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_r8g11b4.tif"
+\end{verbatim}
+
+\hypertarget{lendo-os-arquivos-em-suas-respectivas-pastas}{%
+\subsubsection{5. Lendo os arquivos em suas respectivas
+Pastas}\label{lendo-os-arquivos-em-suas-respectivas-pastas}}
+
+\hypertarget{rgb}{%
+\paragraph{5.1 RGB}\label{rgb}}
+
+A executar, todas as imagens da pasta são carregadas para a memória com
+o repectivos nomes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Criando um lista vazia para as Imagens RGB}
+
+\NormalTok{RGB\_STACK}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Leitura de todas imagens na Pasta RGB}
+
+\NormalTok{r\_name }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path=}\StringTok{"RGB"}\NormalTok{,}\AttributeTok{full.names =}\NormalTok{ F)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in}\NormalTok{ RGB)\{ RGB\_STACK[[i]]}\OtherTok{\textless{}{-}} \FunctionTok{stack}\NormalTok{(i)\} }
+
+\FunctionTok{names}\NormalTok{(RGB\_STACK)}\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(r\_name)}
+
+\NormalTok{RGB\_STACK}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif
+## class      : RasterStack 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## names      : TCI_R, TCI_G, TCI_B 
+## min values :     0,     0,     0 
+## max values :   255,   255,   255
+\end{verbatim}
+
+\hypertarget{ndvi}{%
+\paragraph{5.2 NDVI}\label{ndvi}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NDVI\_STACK}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{() }
+
+\NormalTok{r\_name1 }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path=}\StringTok{"NDVI"}\NormalTok{,}\AttributeTok{full.names =}\NormalTok{ F)}
+
+\ControlFlowTok{for}\NormalTok{(g }\ControlFlowTok{in}\NormalTok{ INDICE)\{ }
+\NormalTok{  NDVI\_STACK[[g]]}\OtherTok{\textless{}{-}} \FunctionTok{stack}\NormalTok{(g)\} }
+
+
+\FunctionTok{names}\NormalTok{(NDVI\_STACK)}\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(r\_name1)}
+
+\NormalTok{NDVI\_STACK}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_r8g11b4.tif
+## class      : RasterStack 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## names      :    B8,   B11,    B4 
+## min values :     0,     0,     0 
+## max values : 65535, 65535, 65535
+\end{verbatim}
+
+\textbf{IMPORTANTE:} Em
+\texttt{bandas\textless{}-NDVI\_STACK{[}{[}1{]}{]}} . O número 1,
+corresponde a ordem da imagem na pasta NDVI. Dessa maneira ao alterar a
+numeração, por exemplo, para 2, a leitura será do segundo arquivo na
+pasta, é comum que seja solicitada imagens em datas distintas. No
+entanto, em nosso exemplo temos somente uma imagem em cada pasta,
+portanto, a númeração deverá ser 1. O resultado desta ação selecionou a
+imagem:\texttt{S2B\_MSIL2A\_20211211T134209\_N0301\_R124\_T22KDF\_20211211T161405\_r8g11b4.tif}
+. Lembrando que esse número deverá se repetir nas linhas em que for
+solicitado.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bandas}\OtherTok{\textless{}{-}}\NormalTok{NDVI\_STACK[[}\DecValTok{1}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{talhao}{%
+\paragraph{5.3 TALHAO}\label{talhao}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TALHAO}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{()                                                           }
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in}\NormalTok{ SHP)\{TALHAO[[j]]}\OtherTok{\textless{}{-}}\NormalTok{ sf}\SpecialCharTok{::}\FunctionTok{st\_read}\NormalTok{(j)\} }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Reading layer `co_1' from data source `C:\@IGOR\R\TALHAO\co_1.shp' using driver `ESRI Shapefile'
+## Simple feature collection with 9 features and 6 fields
+## Geometry type: POLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -50.29243 ymin: -17.2586 xmax: -50.25943 ymax: -17.22538
+## CRS:           NA
+\end{verbatim}
+
+\hypertarget{cuxe1lculo-do-uxedndice-de-diferenuxe7a-normalizada-para-sentinel-ndvi}{%
+\subsubsection{6. Cálculo do Índice de Diferença Normalizada Para
+Sentinel
+(NDVI)}\label{cuxe1lculo-do-uxedndice-de-diferenuxe7a-normalizada-para-sentinel-ndvi}}
+
+Os números em
+\texttt{sat\_ndvi\ \textless{}-\ (bandas{[}{[}1{]}{]}\ -\ bandas{[}{[}3{]}{]})\ /\ (bandas{[}{[}1{]}{]}\ +\ bandas{[}{[}3{]}{]})}
+corresponde a ordem em que a banda espectral encontra-se na imagem.
+Logo, o número 1 corresponde a Banda B8 ( Infravermelho próximo) e 3 (
+vermelho). o Resultado da expressão matemática, é um índice que varia de
+-1 a +1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sat\_ndvi\_list}\OtherTok{\textless{}{-}}\FunctionTok{list}\NormalTok{() }\DocumentationTok{\#\# Criando uma lista para armazenar o produto dos cálculos}
+
+\NormalTok{sat\_ndvi }\OtherTok{\textless{}{-}}\NormalTok{ (bandas[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{{-}}\NormalTok{ bandas[[}\DecValTok{3}\NormalTok{]]) }\SpecialCharTok{/}\NormalTok{ (bandas[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{+}\NormalTok{ bandas[[}\DecValTok{3}\NormalTok{]])}
+
+\NormalTok{NDVI\_STACK}\OtherTok{\textless{}{-}} \FunctionTok{stack}\NormalTok{(sat\_ndvi)}
+
+\NormalTok{NDVI\_STACK}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## class      : RasterStack 
+## dimensions : 390, 468, 182520, 1  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## names      :      layer 
+## min values : -0.1334746 
+## max values :  0.6812573
+\end{verbatim}
+
+\hypertarget{visualizauxe7uxe3o-ndvi}{%
+\paragraph{Visualização NDVI}\label{visualizauxe7uxe3o-ndvi}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(sat\_ndvi)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{2-GERAR-NDVI_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\hypertarget{recortes-das-imagens-por-talhuxe3o.}{%
+\subsubsection{7. Recortes das imagens por
+talhão.}\label{recortes-das-imagens-por-talhuxe3o.}}
+
+Após carregar as imagens RGB e a realização do cálculo NDVI.
+Necessitamos exportar nosso produto final por talhão, com o propósito de
+realizarmos posteriormente nossa classificação das cores no Qgis. Neste
+momento é importante a alteração em
+\texttt{dataoutput\textless{}-data.frame(data=r\_name{[}1{]})}, para o
+número corresponde a imagem que você está utilizando, nesse caso
+{[}1{]}. Esse momento é de extrema importancia, pois a partir desse
+momento, conseguimos criar um forma pra nomear os arquivos de saída
+conforme a data da imagem e o talhão.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CO}\OtherTok{\textless{}{-}}\NormalTok{TALHAO[[}\DecValTok{1}\NormalTok{]]}
+
+\NormalTok{TA}\OtherTok{\textless{}{-}}\NormalTok{CO}\SpecialCharTok{$}\NormalTok{TALHAO}
+
+\NormalTok{output }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{t =}\NormalTok{ TA)}
+
+
+\NormalTok{dataoutput}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{data=}\NormalTok{r\_name[}\DecValTok{1}\NormalTok{]) }\DocumentationTok{\#\#ALTERA O NÚMERO, PARA MUDAR A IMAGEM}
+
+\NormalTok{output}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     t
+## 1 G_2
+## 2 G_3
+## 3 G_4
+## 4 G_5
+## 5 G_1
+## 6 G_4
+## 7 G_2
+## 8 G_3
+## 9 G_5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataoutput}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                                                   data
+## 1 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{names\_data}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(}\StringTok{"RGB\_"}\NormalTok{,output}\SpecialCharTok{$}\NormalTok{t,dataoutput}\SpecialCharTok{$}\NormalTok{data)}
+
+\NormalTok{LISTA}\OtherTok{\textless{}{-}}\FunctionTok{list}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{recorte-rgb}{%
+\paragraph{7.1 Recorte RGB}\label{recorte-rgb}}
+
+Mais uma vez precisamos alterar a númeração de
+\texttt{RGB\_STACK{[}{[}1{]}{]}}. Nesse momento é realizado os corte por
+talhão, sendo armazendo em uma lista \texttt{LISTA\textless{}-list()} .
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{RGB\_STACK}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif
+## class      : RasterStack 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## names      : TCI_R, TCI_G, TCI_B 
+## min values :     0,     0,     0 
+## max values :   255,   255,   255
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ (c }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(output}\SpecialCharTok{$}\NormalTok{t)) \{LISTA[c]}\OtherTok{\textless{}{-}} \FunctionTok{mask}\NormalTok{(RGB\_STACK[[}\DecValTok{1}\NormalTok{]], CO[CO}\SpecialCharTok{$}\NormalTok{TALHAO}\SpecialCharTok{==}\NormalTok{output}\SpecialCharTok{$}\NormalTok{t[c],])}
+ 
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in `[<-`(`*tmp*`, c, value = mask(RGB_STACK[[1]], CO[CO$TALHAO == :
+## implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, c, value = mask(RGB_STACK[[1]], CO[CO$TALHAO == :
+## implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, c, value = mask(RGB_STACK[[1]], CO[CO$TALHAO == :
+## implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, c, value = mask(RGB_STACK[[1]], CO[CO$TALHAO == :
+## implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, c, value = mask(RGB_STACK[[1]], CO[CO$TALHAO == :
+## implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, c, value = mask(RGB_STACK[[1]], CO[CO$TALHAO == :
+## implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, c, value = mask(RGB_STACK[[1]], CO[CO$TALHAO == :
+## implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, c, value = mask(RGB_STACK[[1]], CO[CO$TALHAO == :
+## implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, c, value = mask(RGB_STACK[[1]], CO[CO$TALHAO == :
+## implicit list embedding of S4 objects is deprecated
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{names}\NormalTok{(LISTA)}\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(names\_data)}
+\NormalTok{ LISTA}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $`RGB_ G_2 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : TCI_R, TCI_G, TCI_B 
+## min values :    41,    57,    39 
+## max values :   255,   255,   255 
+## 
+## 
+## $`RGB_ G_3 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : TCI_R, TCI_G, TCI_B 
+## min values :    29,    54,    33 
+## max values :   130,   129,    73 
+## 
+## 
+## $`RGB_ G_4 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : TCI_R, TCI_G, TCI_B 
+## min values :    28,    54,    33 
+## max values :   148,   127,    74 
+## 
+## 
+## $`RGB_ G_5 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : TCI_R, TCI_G, TCI_B 
+## min values :    25,    48,    30 
+## max values :   108,    87,    63 
+## 
+## 
+## $`RGB_ G_1 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : TCI_R, TCI_G, TCI_B 
+## min values :    24,    45,    29 
+## max values :   154,    89,    59 
+## 
+## 
+## $`RGB_ G_4 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : TCI_R, TCI_G, TCI_B 
+## min values :    28,    54,    33 
+## max values :   148,   127,    74 
+## 
+## 
+## $`RGB_ G_2 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : TCI_R, TCI_G, TCI_B 
+## min values :    41,    57,    39 
+## max values :   255,   255,   255 
+## 
+## 
+## $`RGB_ G_3 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : TCI_R, TCI_G, TCI_B 
+## min values :    29,    54,    33 
+## max values :   130,   129,    73 
+## 
+## 
+## $`RGB_ G_5 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : TCI_R, TCI_G, TCI_B 
+## min values :    25,    48,    30 
+## max values :   108,    87,    63
+\end{verbatim}
+
+Apesar das várias mensagens de ``Warning in''(Somente um alerta), O
+processo foi executado com sucesso.
+
+\hypertarget{recorte-ndvi}{%
+\paragraph{7.2 Recorte NDVI}\label{recorte-ndvi}}
+
+Agora repetindo mesmo procedimento para o NDVI.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LISTA\_NDVI}\OtherTok{\textless{}{-}}\FunctionTok{list}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{ (y }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(output}\SpecialCharTok{$}\NormalTok{t)) \{LISTA\_NDVI[y]}\OtherTok{\textless{}{-}} \FunctionTok{mask}\NormalTok{(sat\_ndvi, CO[CO}\SpecialCharTok{$}\NormalTok{TALHAO}\SpecialCharTok{==}\NormalTok{output}\SpecialCharTok{$}\NormalTok{t[y],])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in `[<-`(`*tmp*`, y, value = mask(sat_ndvi, CO[CO$TALHAO ==
+## output$t[y], : implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, y, value = mask(sat_ndvi, CO[CO$TALHAO ==
+## output$t[y], : implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, y, value = mask(sat_ndvi, CO[CO$TALHAO ==
+## output$t[y], : implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, y, value = mask(sat_ndvi, CO[CO$TALHAO ==
+## output$t[y], : implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, y, value = mask(sat_ndvi, CO[CO$TALHAO ==
+## output$t[y], : implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, y, value = mask(sat_ndvi, CO[CO$TALHAO ==
+## output$t[y], : implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, y, value = mask(sat_ndvi, CO[CO$TALHAO ==
+## output$t[y], : implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, y, value = mask(sat_ndvi, CO[CO$TALHAO ==
+## output$t[y], : implicit list embedding of S4 objects is deprecated
+
+## Warning in `[<-`(`*tmp*`, y, value = mask(sat_ndvi, CO[CO$TALHAO ==
+## output$t[y], : implicit list embedding of S4 objects is deprecated
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{names\_data2}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(}\StringTok{"NDVI\_"}\NormalTok{,output}\SpecialCharTok{$}\NormalTok{t,dataoutput}\SpecialCharTok{$}\NormalTok{data)}
+\FunctionTok{names}\NormalTok{(LISTA\_NDVI)}\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(names\_data2)}
+\NormalTok{LISTA\_NDVI}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $`NDVI_ G_2 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : layer 
+## values     : 0.05102954, 0.5903614  (min, max)
+## 
+## 
+## $`NDVI_ G_3 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : layer 
+## values     : 0.1956137, 0.6270208  (min, max)
+## 
+## 
+## $`NDVI_ G_4 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : layer 
+## values     : 0.178557, 0.6248548  (min, max)
+## 
+## 
+## $`NDVI_ G_5 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : layer 
+## values     : 0.2152936, 0.6504935  (min, max)
+## 
+## 
+## $`NDVI_ G_1 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : layer 
+## values     : 0.1419774, 0.6445078  (min, max)
+## 
+## 
+## $`NDVI_ G_4 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : layer 
+## values     : 0.178557, 0.6248548  (min, max)
+## 
+## 
+## $`NDVI_ G_2 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : layer 
+## values     : 0.05102954, 0.5903614  (min, max)
+## 
+## 
+## $`NDVI_ G_3 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : layer 
+## values     : 0.1956137, 0.6270208  (min, max)
+## 
+## 
+## $`NDVI_ G_5 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : memory
+## names      : layer 
+## values     : 0.2152936, 0.6504935  (min, max)
+\end{verbatim}
+
+\hypertarget{exportando-produtos}{%
+\subsubsection{8. EXPORTANDO PRODUTOS}\label{exportando-produtos}}
+
+Por fim, exportaremos nossos produtos
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mapply}\NormalTok{(writeRaster, LISTA, }\FunctionTok{names}\NormalTok{(LISTA), }\StringTok{\textquotesingle{}GTiff\textquotesingle{}}\NormalTok{,}\AttributeTok{overwrite=} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $`RGB_ G_2 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : RGB_ G_2 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : RGB__G_2_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.1, RGB__G_2_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.2, RGB__G_2_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.3 
+## min values :                                                                          41,                                                                          57,                                                                          39 
+## max values :                                                                         255,                                                                         255,                                                                         255 
+## 
+## 
+## $`RGB_ G_3 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : RGB_ G_3 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : RGB__G_3_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.1, RGB__G_3_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.2, RGB__G_3_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.3 
+## min values :                                                                          29,                                                                          54,                                                                          33 
+## max values :                                                                         130,                                                                         129,                                                                          73 
+## 
+## 
+## $`RGB_ G_4 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : RGB_ G_4 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : RGB__G_4_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.1, RGB__G_4_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.2, RGB__G_4_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.3 
+## min values :                                                                          28,                                                                          54,                                                                          33 
+## max values :                                                                         148,                                                                         127,                                                                          74 
+## 
+## 
+## $`RGB_ G_5 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : RGB_ G_5 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : RGB__G_5_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.1, RGB__G_5_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.2, RGB__G_5_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.3 
+## min values :                                                                          25,                                                                          48,                                                                          30 
+## max values :                                                                         108,                                                                          87,                                                                          63 
+## 
+## 
+## $`RGB_ G_1 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : RGB_ G_1 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : RGB__G_1_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.1, RGB__G_1_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.2, RGB__G_1_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.3 
+## min values :                                                                          24,                                                                          45,                                                                          29 
+## max values :                                                                         154,                                                                          89,                                                                          59 
+## 
+## 
+## $`RGB_ G_4 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : RGB_ G_4 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : RGB__G_4_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.1, RGB__G_4_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.2, RGB__G_4_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.3 
+## min values :                                                                          28,                                                                          54,                                                                          33 
+## max values :                                                                         148,                                                                         127,                                                                          74 
+## 
+## 
+## $`RGB_ G_2 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : RGB_ G_2 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : RGB__G_2_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.1, RGB__G_2_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.2, RGB__G_2_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.3 
+## min values :                                                                          41,                                                                          57,                                                                          39 
+## max values :                                                                         255,                                                                         255,                                                                         255 
+## 
+## 
+## $`RGB_ G_3 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : RGB_ G_3 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : RGB__G_3_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.1, RGB__G_3_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.2, RGB__G_3_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.3 
+## min values :                                                                          29,                                                                          54,                                                                          33 
+## max values :                                                                         130,                                                                         129,                                                                          73 
+## 
+## 
+## $`RGB_ G_5 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterBrick 
+## dimensions : 390, 468, 182520, 3  (nrow, ncol, ncell, nlayers)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : RGB_ G_5 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : RGB__G_5_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.1, RGB__G_5_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.2, RGB__G_5_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.3 
+## min values :                                                                          25,                                                                          48,                                                                          30 
+## max values :                                                                         108,                                                                          87,                                                                          63
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mapply}\NormalTok{(writeRaster, LISTA\_NDVI, }\FunctionTok{names}\NormalTok{(LISTA\_NDVI), }\StringTok{\textquotesingle{}GTiff\textquotesingle{}}\NormalTok{, }\AttributeTok{overwrite=} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $`NDVI_ G_2 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : NDVI_ G_2 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : NDVI__G_2_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI 
+## values     : 0.05102954, 0.5903614  (min, max)
+## 
+## 
+## $`NDVI_ G_3 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : NDVI_ G_3 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : NDVI__G_3_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI 
+## values     : 0.1956137, 0.6270208  (min, max)
+## 
+## 
+## $`NDVI_ G_4 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : NDVI_ G_4 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : NDVI__G_4_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI 
+## values     : 0.178557, 0.6248548  (min, max)
+## 
+## 
+## $`NDVI_ G_5 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : NDVI_ G_5 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : NDVI__G_5_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI 
+## values     : 0.2152936, 0.6504935  (min, max)
+## 
+## 
+## $`NDVI_ G_1 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : NDVI_ G_1 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : NDVI__G_1_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI 
+## values     : 0.1419774, 0.6445078  (min, max)
+## 
+## 
+## $`NDVI_ G_4 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : NDVI_ G_4 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : NDVI__G_4_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI 
+## values     : 0.178557, 0.6248548  (min, max)
+## 
+## 
+## $`NDVI_ G_2 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : NDVI_ G_2 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : NDVI__G_2_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI 
+## values     : 0.05102954, 0.5903614  (min, max)
+## 
+## 
+## $`NDVI_ G_3 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : NDVI_ G_3 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : NDVI__G_3_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI 
+## values     : 0.1956137, 0.6270208  (min, max)
+## 
+## 
+## $`NDVI_ G_5 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif`
+## class      : RasterLayer 
+## dimensions : 390, 468, 182520  (nrow, ncol, ncell)
+## resolution : 8.983153e-05, 8.983153e-05  (x, y)
+## extent     : -50.29694, -50.2549, -17.25951, -17.22448  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : NDVI_ G_5 S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI.tif 
+## names      : NDVI__G_5_S2B_MSIL2A_20220216T133219_N0400_R081_T22KEG_20220216T164142_TCI 
+## values     : 0.2152936, 0.6504935  (min, max)
+\end{verbatim}
+
+\end{document}
