@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------------
 # Organizador de resultados EXATA
 # Autor: Igor Viana Souza ( M.e Engenharia Florestal)
-# Data de cria??o: 01/10/2021
+# Data de criacaoo: 01/10/2021
 #-------------------------------------------------------------------------------
 #                         LIMPAR MEMORIA
 #-------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ if(!require(openxlsx)){install.packages("openxlsx")}
 #                       CARREGANDO DADOS
 #-------------------------------------------------------------------------------
 
-EXATA <- read_excel("C:/@IGOR/R/exata.xls",  skip = 6)## SERVIR? PARA EXTRAIR O ID
+EXATA <- read_excel("MANIPULANDO RESULTADO.xls",  skip = 6)## SERVIR? PARA EXTRAIR O ID
 EXATA2 <- EXATA ## SERVIR? PARA EXTRAIR PROF
 EXATA["Prof"] <-c()# ADD COLUNA DE Prof
 
@@ -106,5 +106,5 @@ names(pro_020)[1:26] <- c("Lab","id","prof","zn1",	"mn1",	"fe1",	"cu1",	"b1",
 ##                                   EXPORTANDO XLSX
 list_of_datasets <- list("Geral" = b, "0-10" = pro_010, "10-20"= pro_1020, 
                          "20-40" = pro_2040, "0-20" = pro_020 )
-write.xlsx(list_of_datasets, "C:/@IGOR/R/Exata1.xlsx", overwrite = TRUE)
+write.xlsx(list_of_datasets, "4_RESULTADO FINAL.xlsx", overwrite = TRUE)
 
